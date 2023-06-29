@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83448CDF2A4DE0CA0066CE99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CDE2A4DE0CA0066CE99 /* AppDelegate.swift */; };
+		83448CE12A4DE0CA0066CE99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CE02A4DE0CA0066CE99 /* SceneDelegate.swift */; };
+		83448CE32A4DE0CA0066CE99 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CE22A4DE0CA0066CE99 /* ViewController.swift */; };
+		83448CE62A4DE0CA0066CE99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83448CE42A4DE0CA0066CE99 /* Main.storyboard */; };
+		83448CE82A4DE0CB0066CE99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83448CE72A4DE0CB0066CE99 /* Assets.xcassets */; };
+		83448CEB2A4DE0CB0066CE99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83448CE92A4DE0CB0066CE99 /* LaunchScreen.storyboard */; };
+		83448CF62A4DE0CB0066CE99 /* ChaPokerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CF52A4DE0CB0066CE99 /* ChaPokerTests.swift */; };
+		83448D002A4DE0CB0066CE99 /* ChaPokerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CFF2A4DE0CB0066CE99 /* ChaPokerUITests.swift */; };
+		83448D022A4DE0CB0066CE99 /* ChaPokerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448D012A4DE0CB0066CE99 /* ChaPokerUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		83448CF22A4DE0CB0066CE99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83448CD32A4DE0CA0066CE99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83448CDA2A4DE0CA0066CE99;
+			remoteInfo = ChaPoker;
+		};
+		83448CFC2A4DE0CB0066CE99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83448CD32A4DE0CA0066CE99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83448CDA2A4DE0CA0066CE99;
+			remoteInfo = ChaPoker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		83448CDB2A4DE0CA0066CE99 /* ChaPoker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChaPoker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83448CDE2A4DE0CA0066CE99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83448CE02A4DE0CA0066CE99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		83448CE22A4DE0CA0066CE99 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		83448CE52A4DE0CA0066CE99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83448CE72A4DE0CB0066CE99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83448CEA2A4DE0CB0066CE99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83448CEC2A4DE0CB0066CE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83448CF12A4DE0CB0066CE99 /* ChaPokerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaPokerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83448CF52A4DE0CB0066CE99 /* ChaPokerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaPokerTests.swift; sourceTree = "<group>"; };
+		83448CFB2A4DE0CB0066CE99 /* ChaPokerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaPokerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83448CFF2A4DE0CB0066CE99 /* ChaPokerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaPokerUITests.swift; sourceTree = "<group>"; };
+		83448D012A4DE0CB0066CE99 /* ChaPokerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaPokerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83448CD82A4DE0CA0066CE99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83448CEE2A4DE0CB0066CE99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83448CF82A4DE0CB0066CE99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83448CD22A4DE0CA0066CE99 = {
+			isa = PBXGroup;
+			children = (
+				83448CDD2A4DE0CA0066CE99 /* ChaPoker */,
+				83448CF42A4DE0CB0066CE99 /* ChaPokerTests */,
+				83448CFE2A4DE0CB0066CE99 /* ChaPokerUITests */,
+				83448CDC2A4DE0CA0066CE99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83448CDC2A4DE0CA0066CE99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83448CDB2A4DE0CA0066CE99 /* ChaPoker.app */,
+				83448CF12A4DE0CB0066CE99 /* ChaPokerTests.xctest */,
+				83448CFB2A4DE0CB0066CE99 /* ChaPokerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83448CDD2A4DE0CA0066CE99 /* ChaPoker */ = {
+			isa = PBXGroup;
+			children = (
+				83448CDE2A4DE0CA0066CE99 /* AppDelegate.swift */,
+				83448CE02A4DE0CA0066CE99 /* SceneDelegate.swift */,
+				83448CE22A4DE0CA0066CE99 /* ViewController.swift */,
+				83448CE42A4DE0CA0066CE99 /* Main.storyboard */,
+				83448CE72A4DE0CB0066CE99 /* Assets.xcassets */,
+				83448CE92A4DE0CB0066CE99 /* LaunchScreen.storyboard */,
+				83448CEC2A4DE0CB0066CE99 /* Info.plist */,
+			);
+			path = ChaPoker;
+			sourceTree = "<group>";
+		};
+		83448CF42A4DE0CB0066CE99 /* ChaPokerTests */ = {
+			isa = PBXGroup;
+			children = (
+				83448CF52A4DE0CB0066CE99 /* ChaPokerTests.swift */,
+			);
+			path = ChaPokerTests;
+			sourceTree = "<group>";
+		};
+		83448CFE2A4DE0CB0066CE99 /* ChaPokerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				83448CFF2A4DE0CB0066CE99 /* ChaPokerUITests.swift */,
+				83448D012A4DE0CB0066CE99 /* ChaPokerUITestsLaunchTests.swift */,
+			);
+			path = ChaPokerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83448CDA2A4DE0CA0066CE99 /* ChaPoker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83448D052A4DE0CB0066CE99 /* Build configuration list for PBXNativeTarget "ChaPoker" */;
+			buildPhases = (
+				83448CD72A4DE0CA0066CE99 /* Sources */,
+				83448CD82A4DE0CA0066CE99 /* Frameworks */,
+				83448CD92A4DE0CA0066CE99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChaPoker;
+			productName = ChaPoker;
+			productReference = 83448CDB2A4DE0CA0066CE99 /* ChaPoker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		83448CF02A4DE0CB0066CE99 /* ChaPokerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83448D082A4DE0CB0066CE99 /* Build configuration list for PBXNativeTarget "ChaPokerTests" */;
+			buildPhases = (
+				83448CED2A4DE0CB0066CE99 /* Sources */,
+				83448CEE2A4DE0CB0066CE99 /* Frameworks */,
+				83448CEF2A4DE0CB0066CE99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83448CF32A4DE0CB0066CE99 /* PBXTargetDependency */,
+			);
+			name = ChaPokerTests;
+			productName = ChaPokerTests;
+			productReference = 83448CF12A4DE0CB0066CE99 /* ChaPokerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		83448CFA2A4DE0CB0066CE99 /* ChaPokerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83448D0B2A4DE0CB0066CE99 /* Build configuration list for PBXNativeTarget "ChaPokerUITests" */;
+			buildPhases = (
+				83448CF72A4DE0CB0066CE99 /* Sources */,
+				83448CF82A4DE0CB0066CE99 /* Frameworks */,
+				83448CF92A4DE0CB0066CE99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83448CFD2A4DE0CB0066CE99 /* PBXTargetDependency */,
+			);
+			name = ChaPokerUITests;
+			productName = ChaPokerUITests;
+			productReference = 83448CFB2A4DE0CB0066CE99 /* ChaPokerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83448CD32A4DE0CA0066CE99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					83448CDA2A4DE0CA0066CE99 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					83448CF02A4DE0CB0066CE99 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 83448CDA2A4DE0CA0066CE99;
+					};
+					83448CFA2A4DE0CB0066CE99 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 83448CDA2A4DE0CA0066CE99;
+					};
+				};
+			};
+			buildConfigurationList = 83448CD62A4DE0CA0066CE99 /* Build configuration list for PBXProject "ChaPoker" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83448CD22A4DE0CA0066CE99;
+			productRefGroup = 83448CDC2A4DE0CA0066CE99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83448CDA2A4DE0CA0066CE99 /* ChaPoker */,
+				83448CF02A4DE0CB0066CE99 /* ChaPokerTests */,
+				83448CFA2A4DE0CB0066CE99 /* ChaPokerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83448CD92A4DE0CA0066CE99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83448CEB2A4DE0CB0066CE99 /* LaunchScreen.storyboard in Resources */,
+				83448CE82A4DE0CB0066CE99 /* Assets.xcassets in Resources */,
+				83448CE62A4DE0CA0066CE99 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83448CEF2A4DE0CB0066CE99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83448CF92A4DE0CB0066CE99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83448CD72A4DE0CA0066CE99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83448CE32A4DE0CA0066CE99 /* ViewController.swift in Sources */,
+				83448CDF2A4DE0CA0066CE99 /* AppDelegate.swift in Sources */,
+				83448CE12A4DE0CA0066CE99 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83448CED2A4DE0CB0066CE99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83448CF62A4DE0CB0066CE99 /* ChaPokerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83448CF72A4DE0CB0066CE99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83448D022A4DE0CB0066CE99 /* ChaPokerUITestsLaunchTests.swift in Sources */,
+				83448D002A4DE0CB0066CE99 /* ChaPokerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83448CF32A4DE0CB0066CE99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83448CDA2A4DE0CA0066CE99 /* ChaPoker */;
+			targetProxy = 83448CF22A4DE0CB0066CE99 /* PBXContainerItemProxy */;
+		};
+		83448CFD2A4DE0CB0066CE99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83448CDA2A4DE0CA0066CE99 /* ChaPoker */;
+			targetProxy = 83448CFC2A4DE0CB0066CE99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		83448CE42A4DE0CA0066CE99 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83448CE52A4DE0CA0066CE99 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		83448CE92A4DE0CB0066CE99 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83448CEA2A4DE0CB0066CE99 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83448D032A4DE0CB0066CE99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		83448D042A4DE0CB0066CE99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83448D062A4DE0CB0066CE99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChaPoker/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elads.ChaPoker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83448D072A4DE0CB0066CE99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChaPoker/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elads.ChaPoker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		83448D092A4DE0CB0066CE99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elads.ChaPokerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChaPoker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChaPoker";
+			};
+			name = Debug;
+		};
+		83448D0A2A4DE0CB0066CE99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elads.ChaPokerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChaPoker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChaPoker";
+			};
+			name = Release;
+		};
+		83448D0C2A4DE0CB0066CE99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elads.ChaPokerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChaPoker;
+			};
+			name = Debug;
+		};
+		83448D0D2A4DE0CB0066CE99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elads.ChaPokerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChaPoker;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83448CD62A4DE0CA0066CE99 /* Build configuration list for PBXProject "ChaPoker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83448D032A4DE0CB0066CE99 /* Debug */,
+				83448D042A4DE0CB0066CE99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83448D052A4DE0CB0066CE99 /* Build configuration list for PBXNativeTarget "ChaPoker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83448D062A4DE0CB0066CE99 /* Debug */,
+				83448D072A4DE0CB0066CE99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83448D082A4DE0CB0066CE99 /* Build configuration list for PBXNativeTarget "ChaPokerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83448D092A4DE0CB0066CE99 /* Debug */,
+				83448D0A2A4DE0CB0066CE99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83448D0B2A4DE0CB0066CE99 /* Build configuration list for PBXNativeTarget "ChaPokerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83448D0C2A4DE0CB0066CE99 /* Debug */,
+				83448D0D2A4DE0CB0066CE99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83448CD32A4DE0CA0066CE99 /* Project object */;
+}
