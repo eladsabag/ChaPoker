@@ -69,9 +69,53 @@ class GameManager {
                 print("Error: \(error)")
             }
         }
+        
+    }
+    
+    func updateTable() {
+        client.updateTable(table: table!) { result in
+            switch result {
+            case .success(let data):
+                // Handle successful response
+                print("Response: \(data)")
+                self.delegate?.onTableUpdated()
+            case .failure(let error):
+                // Handle error
+                print("Error: \(error)")
+            }
+        }
     }
     
     func startGameIfNotPlaying() {
-        
+        if table?.gameState == GameState.IDLE {
+            table?.startGame()
+        }
+    }
+    
+    func isMyTurn(userId: String) -> Bool {
+        if let currentPlayer = table?.currentPlayerTurn {
+            return userId == currentPlayer.userId
+        }
+        return false
+    }
+    
+    func isSomeoneMadeBet() -> Bool {
+        if table!.currentBet > 0 {
+            return true
+        }
+        return false
+    }
+    
+    func updateAction(userId: String, action: Action, bet: Int? = nil) {
+        switch(action) {
+        case Action.CHECK:
+            break
+        case Action.CALL:
+            break
+        case Action.BET:
+            break
+        case Action.FOLD:
+            break
+        }
     }
 }

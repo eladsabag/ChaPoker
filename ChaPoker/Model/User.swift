@@ -10,16 +10,18 @@ import Foundation
 class User: Codable {
     let userId: String
     var name: String
-    var profilePictureUrl: URL
+    var profilePictureUrl: URL?
     var chips: Int
     var hand: [Card]?
+    var action: Action?
     
-    init(userId: String, name: String, profilePictureUrl: URL, chips: Int) {
+    init(userId: String, name: String, profilePictureUrl: URL?, chips: Int) {
         self.userId = userId
         self.name = name
         self.profilePictureUrl = profilePictureUrl
         self.chips = chips
         self.hand = []
+        self.action = nil
     }
     
     func receiveCard(_ card: Card) {

@@ -30,21 +30,10 @@ class Deck : Codable {
         cards.shuffle()
     }
     
-    func dealHand() -> [Card]? {
-         guard cards.count >= 2 else {
-             // Not enough cards in the deck to deal
-             return nil
-         }
-         
-         var hand: [Card] = []
-         
-         // Deal two cards for the hand
-         for _ in 1...2 {
-             if let card = cards.popLast() {
-                 hand.append(card)
-             }
-         }
-         
-         return hand
+    func dealCard() -> Card? {
+        if let card = cards.popLast() {
+            return card
+        }
+        return nil
      }
 }

@@ -31,7 +31,7 @@ class HomeManager {
             switch result {
             case .success(let data):
                 // Handle successful response
-                print("Response: \(data)")
+                print("Response: \(String(describing: data))")
                 self.tables = data
                 self.delegate?.onTablesUpdated()
             case .failure(let error):

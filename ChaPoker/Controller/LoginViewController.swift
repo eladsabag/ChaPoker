@@ -11,12 +11,26 @@ import FacebookLogin
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
     var loginManager: LoginManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loginManager = LoginManager()
         loginManager?.delegate = self
+    }
+    
+    func animateWelcomeLabel() {
+        welcomeLabel.text = ""
+        var charIndex = 0.0
+        let titleText = "Welcome to ChaPoker"
+        for letter in titleText {
+            Timer.scheduledTimer(withTimeInterval: 0.1 * charIndex, repeats: false) { (timer) in
+                    self.welcomeLabel.text?.append(letter)
+                }
+                  charIndex += 1
+              }
     }
     
     func setLogginButton() {
@@ -28,29 +42,33 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // Retrieve the current user's auth token
-        if let currentUser = Auth.auth().currentUser {
-            currentUser.getIDToken(completion: { (token, error) in
-                if let token = token {
-                    // Use the auth token
-                    print("Auth Token: \(token)")
-                    UserDefaultsManager.shared.setAuthToken(token)
-                    
-                    // Get the user ID
-                    let userID = currentUser.uid
-                    print("User ID: \(userID)")
-                    // Save the user ID if needed
-                    UserDefaultsManager.shared.setUserID(userID)
-                } else if let error = error {
-                    // Handle error
-                    print("Error retrieving auth token: \(error.localizedDescription)")
-                }
-                self.loginManager?.getUser()
-            })
-        } else {
-            // No logged-in user
-            print("No logged-in user")
-            setLogginButton()
+        animateWelcomeLabel()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // Retrieve the current user's auth token
+            if let currentUser = Auth.auth().currentUser {
+                currentUser.getIDToken(completion: { (token, error) in
+                    if let token = token {
+                        // Use the auth token
+                        print("Auth Token: \(token)")
+                        UserDefaultsManager.shared.setAuthToken(token)
+                        
+                        // Get the user ID
+                        let userID = currentUser.uid
+                        print("User ID: \(userID)")
+                        // Save the user ID if needed
+                        UserDefaultsManager.shared.setUserID(userID)
+                    } else if let error = error {
+                        // Handle error
+                        print("Error retrieving auth token: \(error.localizedDescription)")
+                    }
+                    self.loginManager?.getUser()
+                })
+            } else {
+                // No logged-in user
+                print("No logged-in user")
+                self.setLogginButton()
+            }
         }
     }
 
@@ -76,31 +94,29 @@ class LoginViewController: UIViewController {
     func initUserFromGraph() {
         if let userId = UserDefaultsManager.shared.getUserID() {
             // Fetch user's name and profile picture URL
-            if let currentUser = Auth.auth().currentUser {
-                let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields": "name,picture.type(large)"])
-                graphRequest.start { (_, result, error) in
-                    if let error = error {
-                        print("Failed to fetch Facebook user information: ", error.localizedDescription)
-                        return
-                    }
-                    
-                    if let userData = result as? [String: Any] {
-                        if let name = userData["name"] as? String {
-                            print("User name: ", name)
-                            if let pictureData = userData["picture"] as? [String: Any],
-                                let pictureUrlData = pictureData["data"] as? [String: Any],
-                                let pictureUrlString = pictureUrlData["url"] as? String,
-                                let pictureUrl = URL(string: pictureUrlString) {
-                                print("Profile picture URL: ", pictureUrl.absoluteString)
-                                
-                                self.loginManager?.user = User(
-                                    userId: userId,
-                                    name: name,
-                                    profilePictureUrl: pictureUrl,
-                                    chips: 100
-                                )
-                                self.loginManager?.addUser()
-                            }
+            let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields": "name,picture.type(large)"])
+            graphRequest.start { (_, result, error) in
+                if let error = error {
+                    print("Failed to fetch Facebook user information: ", error.localizedDescription)
+                    return
+                }
+                
+                if let userData = result as? [String: Any] {
+                    if let name = userData["name"] as? String {
+                        print("User name: ", name)
+                        if let pictureData = userData["picture"] as? [String: Any],
+                            let pictureUrlData = pictureData["data"] as? [String: Any],
+                            let pictureUrlString = pictureUrlData["url"] as? String,
+                            let pictureUrl = URL(string: pictureUrlString) {
+                            print("Profile picture URL: ", pictureUrl.absoluteString)
+                            
+                            self.loginManager?.user = User(
+                                userId: userId,
+                                name: name,
+                                profilePictureUrl: pictureUrl,
+                                chips: 100
+                            )
+                            self.loginManager?.addUser()
                         }
                     }
                 }

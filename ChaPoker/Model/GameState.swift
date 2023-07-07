@@ -8,6 +8,7 @@
 import Foundation
 
 enum GameState : Codable {
+    case IDLE
     case PREFLOP
     case FLOP
     case TURN

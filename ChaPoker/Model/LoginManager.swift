@@ -15,9 +15,10 @@ protocol LoginManagerDelegate {
 class LoginManager {
     var delegate: LoginManagerDelegate?
     var user: User?
+    let client = NetworkManager.shared
     
     func addUser() {
-        NetworkManager.shared.addUserToFirebase(user: self.user!) { result in
+        client.addUserToFirebase(user: self.user!) { result in
             switch result {
             case .success(let data):
                 // Handle successful response
@@ -32,7 +33,7 @@ class LoginManager {
     }
     
     func getUser() {
-        NetworkManager.shared.fetchCurrentUser { result in
+        client.fetchCurrentUser { result in
             switch result {
             case .success(let data):
                 // Handle successful response
