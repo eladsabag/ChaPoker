@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum GameState : Codable {
-    case IDLE
-    case PREFLOP
-    case FLOP
-    case TURN
-    case RIVER
+enum GameState : String, Codable {
+    case IDLE = "IDLE"
+    case PREFLOP = "PREFLOP"
+    case FLOP = "FLOP"
+    case TURN = "TURN"
+    case RIVER = "RIVER"
 }

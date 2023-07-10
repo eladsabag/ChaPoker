@@ -14,20 +14,12 @@ class UserDefaultsManager {
     private let userIdKey = "userIdKey"
 
     private init() {}
-
-    func isLoggedIn() -> Bool {
-        return UserDefaults.standard.bool(forKey: loggedInKey)
-    }
-
-    func setLoggedIn(_ value: Bool) {
-        UserDefaults.standard.set(value, forKey: loggedInKey)
-    }
     
     func getAuthToken() -> String? {
         return UserDefaults.standard.string(forKey: authTokenKey)
     }
 
-    func setAuthToken(_ token: String) {
+    func setAuthToken(_ token: String?) {
         UserDefaults.standard.set(token, forKey: authTokenKey)
     }
     
@@ -35,7 +27,7 @@ class UserDefaultsManager {
         return UserDefaults.standard.string(forKey: userIdKey)
     }
 
-    func setUserID(_ token: String) {
+    func setUserID(_ token: String?) {
         UserDefaults.standard.set(token, forKey: userIdKey)
     }
 }

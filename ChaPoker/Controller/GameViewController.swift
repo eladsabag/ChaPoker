@@ -13,10 +13,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var betButton: UIButton!
     @IBOutlet weak var foldButton: UIButton!
     @IBOutlet weak var blindLabel: UILabel!
-    @IBOutlet weak var checkIcon: UIImageView!
-    @IBOutlet weak var callIcon: UIImageView!
-    @IBOutlet weak var betIcon: UIImageView!
-    @IBOutlet weak var foldIcon: UIImageView!
     @IBOutlet weak var flopImg1: UIImageView!
     @IBOutlet weak var flopImg2: UIImageView!
     @IBOutlet weak var flopImg3: UIImageView!
@@ -45,6 +41,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var middlePlayerPotLabel: UILabel!
     @IBOutlet weak var rightMiddlePlayerPotLabel: UILabel!
     @IBOutlet weak var rightPlayerPotLabel: UILabel!
+    @IBOutlet weak var playerTurnLabel: UILabel!
+    @IBOutlet weak var turnTimeLabel: UILabel!
     
     var gameManager: GameManager?
     var table: Table?
@@ -52,45 +50,64 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gameManager = GameManager(table: table, user: user)
+        gameManager = GameManager(table: table!, user: user!)
         gameManager?.delegate = self
         gameManager?.observeTable()
+        gameManager?.observeAllPlayersConnectivity(userId: user!.userId)
+        initBlinds()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+  
     }
     
     @IBAction func betChanged(_ sender: Any) {
-        if let currentPlayerChips = gameManager?.table?.currentPlayerTurn?.chips {
+        if let currentPlayerChips = gameManager?.table.currentPlayerSeatTurn?.player?.chips {
             betLabel.text = betSlider.value == betSlider.maximumValue || Int(betSlider.value) == currentPlayerChips ? "All-In" : "\(Int(betSlider.value))$"
         }
     }
 
     @IBAction func checkPressed(_ sender: UIButton) {
-        if gameManager!.isSomeoneMadeBet() {
+        if gameManager!.isSomeoneMadeBet() || !gameManager!.isInGame() {
             return
         }
-        updateCheckedIcon(i: 0)
-        gameManager?.updateAction(userId: user!.userId, action: Action.CHECK)
+        gameManager?.updateRoundState(action: Action.CHECK)
     }
     
     @IBAction func callPressed(_ sender: Any) {
-        updateCheckedIcon(i: 1)
-        gameManager?.updateAction(userId: user!.userId, action: Action.CALL)
+        if !gameManager!.isInGame() {
+            return
+        }
+        gameManager?.updateRoundState(action: Action.CALL)
     }
     
     @IBAction func betPressed(_ sender: Any) {
-        updateCheckedIcon(i: 2)
-        gameManager?.updateAction(userId: user!.userId, action: Action.BET, bet: Int(betSlider.value))
+        if !gameManager!.isInGame() {
+            return
+        }
+        gameManager?.updateRoundState(action: Action.BET, bet: Int(betSlider.value))
     }
     
     @IBAction func foldPressed(_ sender: Any) {
-        updateCheckedIcon(i: 3)
-        gameManager?.updateAction(userId: user!.userId, action: Action.FOLD)
-    }
-    
-    func updateCheckedIcon(i: Int) {
-        checkIcon.isHidden = !(i == 0)
-        callIcon.isHidden = !(i == 1)
-        betIcon.isHidden = !(i == 2)
-        foldIcon.isHidden = !(i == 3)
+        if !gameManager!.isInGame() {
+            return
+        }
+        gameManager?.updateRoundState(action: Action.FOLD)
     }
     
     @IBAction func leavePressed(_ sender: Any) {
@@ -115,21 +132,148 @@ class GameViewController: UIViewController {
     }
     
     func initProfileImages() {
-        if let players = gameManager?.table?.players {
-            for (i, player) in players.enumerated() {
+        if let seats = gameManager?.table.seats {
+            for seat in seats {
                 var img: UIImageView? = nil
-                img = i == 0 ? leftPlayerImg : i == 1 ? leftMiddlePlayerImg : i == 2 ? middlePlayerImg : i == 3 ? rightMiddlePlayerImg : rightPlayerImg
-                updateProfileImg(img: img!, player: player)
+                switch(seat.seatIndex) {
+                case 0:
+                    img = leftPlayerImg
+                    break
+                case 1:
+                    img = leftMiddlePlayerImg
+                    break
+                case 2:
+                    img = middlePlayerImg
+                    break
+                case 3:
+                    img = rightMiddlePlayerImg
+                    break
+                case 4:
+                    img = rightPlayerImg
+                    break
+                default:
+                    break
+                }
+                img?.isHidden = seat.isSeatEmpty()
+                if let player = seat.player {
+                    updateProfileImg(img: img!, player: player)
+                }
+            }
+        }
+    }
+    
+    func initPlayersChipsLabels() {
+        if let seats = gameManager?.table.seats {
+            for seat in seats {
+                var lbl: UILabel? = nil
+                switch(seat.seatIndex) {
+                case 0:
+                    lbl = leftPlayerPotLabel
+                    break
+                case 1:
+                    lbl = leftMiddlePlayerPotLabel
+                    break
+                case 2:
+                    lbl = middlePlayerPotLabel
+                    break
+                case 3:
+                    lbl = rightMiddlePlayerPotLabel
+                    break
+                case 4:
+                    lbl = rightPlayerPotLabel
+                    break
+                default:
+                    break
+                }
+                lbl?.isHidden = seat.isSeatEmpty()
+                if !seat.isSeatEmpty() {
+                    lbl?.text = "\(seat.player!.chips)$"
+                }
             }
         }
     }
     
     func initPlayersCards() {
-        
+        if let seats = gameManager?.table.seats {
+            for seat in seats {
+                var img1: UIImageView? = nil
+                var img2: UIImageView? = nil
+                switch(seat.seatIndex) {
+                case 0:
+                    img1 = leftCardImg1
+                    img2 = leftCardImg2
+                    break
+                case 1:
+                    img1 = leftMiddleCardImg1
+                    img2 = leftMiddleCardImg2
+                    break
+                case 2:
+                    img1 = middleCardImg1
+                    img2 = middleCardImg2
+                    break
+                case 3:
+                    img1 = rightMiddleCardImg1
+                    img2 = rightMiddleCardImg2
+                    break
+                case 4:
+                    img1 = rightCardImg1
+                    img2 = rightCardImg2
+                    break
+                default:
+                    break
+                }
+                img1?.isHidden = !seat.hasCards()
+                img2?.isHidden = !seat.hasCards()
+                if seat.hasCards() {
+                    let cardImg1 = seat.player?.hand![0].imageName
+                    let cardImg2 = seat.player?.hand![1].imageName
+                    
+                    img1?.image = UIImage(named: seat.isMySeat(userId: user!.userId) ? cardImg1! : "card")
+                    img2?.image = UIImage(named: seat.isMySeat(userId: user!.userId) ? cardImg2! : "card")
+                }
+            }
+        }
+    }
+    
+    func initPlayerMoves() {
+        let isMyTurn = gameManager?.isMyTurn() ?? false
+        checkButton.isHidden = !isMyTurn
+        callButton.isHidden = !isMyTurn
+        betButton.isHidden = !isMyTurn
+        foldButton.isHidden = !isMyTurn
+        betSlider.isHidden = !isMyTurn
+        betLabel.isHidden = !isMyTurn
+        if isMyTurn,
+            let table = gameManager?.table, let currentPlayer = table.currentPlayerSeatTurn?.player {
+            // TODO
+            betSlider.minimumValue = table.currentBet > table.bigBlind ? Float(table.currentBet * 2) : Float(table.bigBlind)
+            betSlider.maximumValue = Float(user!.chips)
+            betLabel.text = betSlider.value == betSlider.maximumValue || Int(betSlider.value) == currentPlayer.chips ? "All-In" : "\(Int(betSlider.value))$"
+        }
     }
     
     func initTableCards() {
-        
+        let flop = gameManager?.table.flop
+        let turn = gameManager?.table.turn
+        let river = gameManager?.table.river
+        if let flop = flop {
+            if !flop.isEmpty {
+                flopImg1.image = UIImage(named: flop[0].imageName)
+                flopImg2.image = UIImage(named: flop[1].imageName)
+                flopImg3.image = UIImage(named: flop[2].imageName)
+            }
+        }
+        if let turn = turn {
+            turnImg.image = UIImage(named: turn.imageName)
+        }
+        if let river = river {
+            riverImg.image = UIImage(named: river.imageName)
+        }
+        flopImg1.isHidden = flop == nil || flop!.isEmpty
+        flopImg2.isHidden = flop == nil || flop!.isEmpty
+        flopImg3.isHidden = flop == nil || flop!.isEmpty
+        turnImg.isHidden = turn == nil
+        riverImg.isHidden = river == nil
     }
     
     func initBlinds() {
@@ -137,102 +281,47 @@ class GameViewController: UIViewController {
     }
     
     func initRoundPot() {
-        potLabel.text = "Pot: \(gameManager?.table?.pot ?? 0)$"
+        potLabel.text = "Pot: \(gameManager?.table.pot ?? 0)$"
     }
     
-    func initRoundTimer() {
+    func initPlayerTurnLabel() {
+        let isGameIdle = gameManager?.table.gameState == GameState.IDLE
+        playerTurnLabel.isHidden = isGameIdle
+        if !isGameIdle {
+            if let playerName = gameManager?.table.currentPlayerSeatTurn?.player?.name {
+                playerTurnLabel.text = "Turn: \(playerName)"
+            }
+        }
         
     }
     
-    func initPlayersPotsAndCards() {
-        if let seats = gameManager?.table?.seats {
-            for seat in seats {
-                let isHidden = seat.player == nil
-                let player = gameManager?.table?.players?.first(where: { $0.userId == seat.player?.userId })
-                let isInGame = gameManager?.table?.currentRoundPlayers?.first(where: { $0?.userId == player?.userId }) != nil
-                switch(seat.seatIndex) {
-                case 0:
-                    if !isHidden {
-                        leftPlayerPotLabel.text = "\(player!.chips)$"
-                    }
-                    leftPlayerPotLabel.isHidden = isHidden
-                    leftCardImg1.isHidden = isHidden || !isInGame
-                    leftCardImg2.isHidden = isHidden || !isInGame
-                    break
-                case 1:
-                    if !isHidden {
-                        leftMiddlePlayerPotLabel.text = "\(player!.chips)$"
-                    }
-                    leftMiddlePlayerPotLabel.isHidden = isHidden
-                    leftMiddleCardImg1.isHidden = isHidden || !isInGame
-                    leftMiddleCardImg2.isHidden = isHidden || !isInGame
-                    break
-                case 2:
-                    if !isHidden {
-                        middlePlayerPotLabel.text = "\(player!.chips)$"
-                    }
-                    middlePlayerPotLabel.isHidden = isHidden
-                    middleCardImg1.isHidden = isHidden || !isInGame
-                    middleCardImg2.isHidden = isHidden || !isInGame
-                    break
-                case 3:
-                    if !isHidden {
-                        rightMiddlePlayerPotLabel.text = "\(player!.chips)$"
-                    }
-                    rightMiddlePlayerPotLabel.isHidden = isHidden
-                    rightMiddleCardImg1.isHidden = isHidden || !isInGame
-                    rightMiddleCardImg2.isHidden = isHidden || !isInGame
-                    break
-                case 4:
-                    if !isHidden {
-                        rightPlayerPotLabel.text = "\(player!.chips)$"
-                    }
-                    rightPlayerPotLabel.isHidden = isHidden
-                    rightCardImg1.isHidden = isHidden || !isInGame
-                    rightCardImg2.isHidden = isHidden || !isInGame
-                    break
-                default:
-                    break
-                }
-            }
-        }
-    }
-    
-    func initPlayerMoves() {
-        if let isMyTurn = gameManager?.isMyTurn(userId: user!.userId) {
-            checkButton.isHidden = !isMyTurn
-            checkIcon.isHidden = !isMyTurn
-            callButton.isHidden = !isMyTurn
-            callIcon.isHidden = !isMyTurn
-            betButton.isHidden = !isMyTurn
-            betIcon.isHidden = !isMyTurn
-            foldButton.isHidden = !isMyTurn
-            foldIcon.isHidden = !isMyTurn
-        }
-    }
-    
-    func initCurrentBet() {
-        if let isMyTurn = gameManager?.isMyTurn(userId: user!.userId),
-            let isSomeoneMadeBet = gameManager?.isSomeoneMadeBet(),
-           let table = gameManager?.table, let currentPlayer = table.currentPlayerTurn {
-            betSlider.minimumValue = isSomeoneMadeBet ? Float(table.currentBet * 2) : Float(table.bigBlind)
-            betSlider.maximumValue = Float(user!.chips)
-            betLabel.text = betSlider.value == betSlider.maximumValue || Int(betSlider.value) == currentPlayer.chips ? "All-In" : "\(Int(betSlider.value))$"
-            betSlider.isHidden = !isMyTurn
-            betSlider.isHidden = !isMyTurn
-            betLabel.isHidden = !isMyTurn
-        }
+    func initPlayerTimer() {
+        //TODO
     }
     
     func updateUI() {
+        // 1. leave table button - always show ✓
+        // 2. blind label - always show ✓
+        // 3. pot label - always show ✓
+        // 4. profile images - seat not empty(player in it != nil) - show ✓
+        // 5. players chips label - seat not empty(player in it != nil) - show ✓
+        // 6. players cards face down - player hand not empty - show ✓
+        // 7. players cards face up - player hand not empty && (my cards(user id equals to the seat player user id) || round ends) - show ✓
+        // 8. action buttons(check, call, bet, fold, bet slider, bet label) - is my turn - show ✓
+        // 9. flop cards - flop cards not empty - show ✓
+        // 10. turn card - turn card not empty - show ✓
+        // 11. river card - river card not empty - show ✓
+        // 12. round pot label - set to current round pot or 0 - always show
+        // 13. player turn label - set to current player first name and show if game is not idle - show
+        // 14. player turn timer - set to 30 seconds when game is running, and my turn - show
         initProfileImages()
+        initPlayersChipsLabels()
+        initPlayersCards() // TODO add round ends
+        initPlayerMoves() // TODO change during round when users makes bet, bet slider and bet label must update
         initTableCards()
-        initBlinds()
         initRoundPot()
-        initRoundTimer()
-        initPlayersPotsAndCards()
-        initPlayerMoves()
-        initCurrentBet()
+        initPlayerTurnLabel()
+        initPlayerTimer()
     }
 }
 
@@ -245,6 +334,7 @@ extension GameViewController: GameManagerDelegate {
     }
     
     func onTableUpdated() {
+        print("onTablesUpdated")
         DispatchQueue.main.async {
             self.updateUI()
             self.gameManager?.startGameIfNotPlaying()

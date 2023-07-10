@@ -8,19 +8,19 @@
 import Foundation
 
 enum Rank: String, CaseIterable, Codable {
-    case ace = "A"
-    case two = "2"
-    case three = "3"
-    case four = "4"
-    case five = "5"
-    case six = "6"
-    case seven = "7"
-    case eight = "8"
-    case nine = "9"
-    case ten = "10"
-    case jack = "J"
-    case queen = "Q"
-    case king = "K"
+    case ace = "ace"
+    case two = "two"
+    case three = "three"
+    case four = "four"
+    case five = "five"
+    case six = "six"
+    case seven = "seven"
+    case eight = "eight"
+    case nine = "nine"
+    case ten = "ten"
+    case jack = "jack"
+    case queen = "queen"
+    case king = "king"
     
     var value: Int {
         switch self {

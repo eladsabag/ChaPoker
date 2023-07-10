@@ -2,6 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb235109025968402</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>235109025968402</string>
+	<key>FacebookClientToken</key>
+	<string>67b5604b672039771f84c1bd2176f88b</string>
+	<key>FacebookDisplayName</key>
+	<string>ChaPoker</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -21,27 +41,5 @@
 			</array>
 		</dict>
 	</dict>
-    
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb235109025968402</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>235109025968402</string>
-    <key>FacebookClientToken</key>
-    <string>67b5604b672039771f84c1bd2176f88b</string>
-    <key>FacebookDisplayName</key>
-    <string>ChaPoker</string>
-    
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>fbapi</string>
-      <string>fb-messenger-share-api</string>
-    </array>
 </dict>
 </plist>

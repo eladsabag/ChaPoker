@@ -15,65 +15,63 @@ protocol GameManagerDelegate {
 
 class GameManager {
     var delegate: GameManagerDelegate?
-    var table: Table?
-    var user: User?
+    var table: Table
+    var user: User
     var tableReference: DatabaseReference!
     let client = NetworkManager.shared
 
-    init(table: Table? = nil, user: User? = nil) {
+    init(table: Table, user: User) {
         self.table = table
         self.user = user
-        
-        // Set up the Firebase database reference for the tables
-        tableReference = Database.database().reference().child("tables").child(table!.tableID)
     }
     
     func observeTable() {
-        tableReference.observe(.value) { snapshot in
-            guard snapshot.exists(), let tableData = snapshot.value as? [String: Any] else {
-                // Handle error or empty data
-                return
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                let tableJSONData = try JSONSerialization.data(withJSONObject: tableData, options: [])
-
-                // Decode the table data into a Table object
-                let updatedTable = try decoder.decode(Table.self, from: tableJSONData)
-
-                // Update the local table property
-                self.table = updatedTable
+        client.observeTable(tableId: table.tableID) { result in
+            switch result {
+            case .success(let data):
+                // Handle successful response
+                print("Response: \(data)")
+                self.table = data
                 self.delegate?.onTableUpdated()
-            } catch {
-                // Handle error during decoding
-                print("Error decoding table data:", error)
+            case .failure(let error):
+                // Handle error
+                print("Error: \(error)")
+            }
+        }
+    }
+
+    // TODO handle this states
+    func observeAllPlayersConnectivity(userId: String) {
+        client.observeUserConnectivity(userId: userId) { isConnected in
+            if isConnected {
+                print("User \(userId) is connected")
+            } else {
+                print("User \(userId) is disconnected")
             }
         }
     }
     
     func leaveTable() {
-        if table?.players?.count == 0 ||
-            table?.players?.contains(where: { $0.userId == user!.userId }) == false {
+        if table.playersCount == 0 {
             return
         }
-        table?.removePlayer(user!)
-        client.updateTable(table: table!) { result in
+        table.removePlayer(user)
+        client.updateTable(table: table) { result in
             switch result {
             case .success(let data):
                 // Handle successful response
-                print("Response: \(data)")
+                print("leaveTable Response: \(data)")
                 self.delegate?.onUserLeavedTable()
             case .failure(let error):
                 // Handle error
-                print("Error: \(error)")
+                print("leaveTable Error: \(error)")
             }
         }
         
     }
     
     func updateTable() {
-        client.updateTable(table: table!) { result in
+        client.updateTable(table: table) { result in
             switch result {
             case .success(let data):
                 // Handle successful response
@@ -87,35 +85,40 @@ class GameManager {
     }
     
     func startGameIfNotPlaying() {
-        if table?.gameState == GameState.IDLE {
-            table?.startGame()
+        if table.gameState == GameState.IDLE && table.playersCount >= 2 {
+            print("start game if not playing")
+            table.startGame()
+            updateTable()
         }
     }
     
-    func isMyTurn(userId: String) -> Bool {
-        if let currentPlayer = table?.currentPlayerTurn {
-            return userId == currentPlayer.userId
+    func isMyTurn() -> Bool {
+        if let currentPlayer = table.currentPlayerSeatTurn?.player {
+            return user.userId == currentPlayer.userId
         }
         return false
     }
     
     func isSomeoneMadeBet() -> Bool {
-        if table!.currentBet > 0 {
+        if table.currentBet > 0 {
             return true
         }
         return false
     }
     
-    func updateAction(userId: String, action: Action, bet: Int? = nil) {
-        switch(action) {
-        case Action.CHECK:
-            break
-        case Action.CALL:
-            break
-        case Action.BET:
-            break
-        case Action.FOLD:
-            break
+    func isInGame() -> Bool {
+        if let seat = table.seats.first(where: { $0.isMySeat(userId: user.userId) }) {
+            return seat.isInGame()
         }
+        return false
+    }
+    
+    func isGameOver() -> Bool {
+        return table.gameState != GameState.IDLE && table.playersCount <= 1
+    }
+    
+    func updateRoundState(action: Action, bet: Int? = nil) {
+        table.updateRoundState(action: action)
+        updateTable()
     }
 }

@@ -13,7 +13,6 @@ class User: Codable {
     var profilePictureUrl: URL?
     var chips: Int
     var hand: [Card]?
-    var action: Action?
     
     init(userId: String, name: String, profilePictureUrl: URL?, chips: Int) {
         self.userId = userId
@@ -21,7 +20,6 @@ class User: Codable {
         self.profilePictureUrl = profilePictureUrl
         self.chips = chips
         self.hand = []
-        self.action = nil
     }
     
     func receiveCard(_ card: Card) {

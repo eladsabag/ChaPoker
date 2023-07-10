@@ -9,21 +9,27 @@ import UIKit
 import FacebookCore
 import FacebookLogin
 import FirebaseAuth
+import Firebase
+import FirebaseDatabase
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var chipsLabel: UILabel!
     
-    @IBOutlet weak var firstModeView: UIView!
-    @IBOutlet weak var firstModeImg: UIImageView!
+    @IBOutlet weak var texasLabel: UILabel!
+    @IBOutlet weak var pineappleLabel: UILabel!
+    @IBOutlet weak var chocoLabel: UILabel!
     
-    @IBOutlet weak var secondModeView: UIView!
-    @IBOutlet weak var secondModeImg: UIImageView!
+    @IBOutlet weak var texasImg: UIImageView!
+    @IBOutlet weak var pineappleImg: UIImageView!
+    @IBOutlet weak var chocoImg: UIImageView!
     
-    @IBOutlet weak var chapLabel: UILabel!
-    @IBOutlet weak var omahaLabel: UILabel!
+    @IBOutlet weak var joinTexasBtn: UIButton!
+    @IBOutlet weak var joinPineappleBtn: UIButton!
+    @IBOutlet weak var joinChocoBtn: UIButton!
     
-    @IBOutlet weak var texasButton: UIButton!
-    @IBOutlet weak var omahaButton: UIButton!
+    @IBOutlet weak var texasCountLabel: UILabel!
+    @IBOutlet weak var pineappleCountLabel: UILabel!
+    @IBOutlet weak var chocoCountLabel: UILabel!
     
     var homeManager: HomeManager?
     var user: User?
@@ -35,8 +41,11 @@ class HomeViewController: UIViewController {
         homeManager?.delegate = self
         homeManager?.fetchTables()
         homeManager?.observeTables()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         initViews()
-        setLogoutButton()
+        setLogoutButton()   
     }
     
     func initViews() {
@@ -45,16 +54,21 @@ class HomeViewController: UIViewController {
         } else {
             chipsLabel.text = "Chips: N/A"
         }
-        firstModeView.layer.cornerRadius = 10.0
-        firstModeImg.layer.cornerRadius = 10.0
-        secondModeView.layer.cornerRadius = 10.0
-        secondModeImg.layer.cornerRadius = 10.0
-        chapLabel.layer.cornerRadius = 10.0
-        chapLabel.layer.borderWidth = 1.0
-        chapLabel.layer.borderColor = UIColor.yellow.cgColor
-        omahaLabel.layer.cornerRadius = 10.0
-        omahaLabel.layer.borderWidth = 1.0
-        omahaLabel.layer.borderColor = UIColor.yellow.cgColor
+        texasImg.layer.cornerRadius = 10.0
+        joinTexasBtn.layer.cornerRadius = 10.0
+        texasLabel.layer.cornerRadius = 10.0
+        texasLabel.layer.borderWidth = 1.0
+        texasLabel.layer.borderColor = UIColor.yellow.cgColor
+        pineappleImg.layer.cornerRadius = 10.0
+        joinPineappleBtn.layer.cornerRadius = 10.0
+        pineappleLabel.layer.cornerRadius = 10.0
+        pineappleLabel.layer.borderWidth = 1.0
+        pineappleLabel.layer.borderColor = UIColor.yellow.cgColor
+        chocoImg.layer.cornerRadius = 10.0
+        joinChocoBtn.layer.cornerRadius = 10.0
+        chocoLabel.layer.cornerRadius = 10.0
+        chocoLabel.layer.borderWidth = 1.0
+        chocoLabel.layer.borderColor = UIColor.yellow.cgColor
     }
     
     func setLogoutButton() {
@@ -70,29 +84,38 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func updateTableButtons() {
-        if let table1 = homeManager?.tables?[0], let table2 = homeManager?.tables?[1] {
-            let texasTable = table1.gameType == "Texas" ? table1 : table2
-            let omahaTable = table1.gameType == "Omaha" ? table1 : table2
-            texasButton.setTitle("Join Table(\(texasTable.playersCount ?? 0)/\(texasTable.maxPlayers))", for: .normal)
-            omahaButton.setTitle("Join Table(\(omahaTable.playersCount ?? 0)/\(omahaTable.maxPlayers))", for: .normal)
+    func updateUI() {
+        if let table1 = homeManager?.tables?[0], let table2 = homeManager?.tables?[1], let table3 = homeManager?.tables?[2]  {
+            texasCountLabel.text = "\(table1.playersCount)/\(table1.maxPlayers)"
+            pineappleCountLabel.text = "\(table2.playersCount)/\(table2.maxPlayers)"
+            chocoCountLabel.text = "\(table3.playersCount)/\(table3.maxPlayers)"
         } else {
-            texasButton.setTitle("N/A", for: .normal)
-            omahaButton.setTitle("N/A", for: .normal)
+            print("Nothing to update.")
+        }
+    }
+
+
+    @IBAction func joinTexasPressed(_ sender: Any) {
+        if let table1 = homeManager?.tables?[0] {
+            homeManager?.joinTable(table: table1, user: user!)
+        } else {
+            print("Didn't join table")
         }
     }
     
-    @IBAction func texasHoldemPressed(_ sender: Any) {
-        if let table1 = homeManager?.tables?[0], let table2 = homeManager?.tables?[1] {
-            let texasTable = table1.gameType == "Texas" ? table1 : table2
-            homeManager?.joinTable(table: texasTable, user: user!)
+    @IBAction func joinPineapplePressed(_ sender: Any) {
+        if let table2 = homeManager?.tables?[1] {
+            homeManager?.joinTable(table: table2, user: user!)
+        } else {
+            print("Didn't join table")
         }
     }
     
-    @IBAction func omahaPressed(_ sender: Any) {
-        if let table1 = homeManager?.tables?[0], let table2 = homeManager?.tables?[1] {
-            let omahaTable = table1.gameType == "Omaha" ? table1 : table2
-            homeManager?.joinTable(table: omahaTable, user: user!)
+    @IBAction func joinChocoPressed(_ sender: Any) {
+        if let table3 = homeManager?.tables?[2] {
+            homeManager?.joinTable(table: table3, user: user!)
+        } else {
+            print("Didn't join table")
         }
     }
     
@@ -117,6 +140,8 @@ extension HomeViewController: LoginButtonDelegate {
         } catch let signOutError as NSError {
           print("Error signing out: %@", signOutError)
         }
+        UserDefaultsManager.shared.setAuthToken(nil)
+        UserDefaultsManager.shared.setUserID(nil)
         self.performSegue(withIdentifier: "navigateFromHomeToLogin", sender: self)
     }
 }
@@ -124,8 +149,9 @@ extension HomeViewController: LoginButtonDelegate {
 extension HomeViewController: HomeManagerDelegate {
     
     func onTablesUpdated() {
+        print("onTablesUpdated")
         DispatchQueue.main.async {
-            self.updateTableButtons()
+            self.updateUI()
         }
     }
     

@@ -42,33 +42,24 @@ class HomeManager {
     }
 
     func observeTables() {
-        tablesReference.observe(.value) { snapshot in
-            guard let tablesData = snapshot.value as? [String: Any] else {
-                // Handle error or empty data
-                return
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                let tablesJSONData = try JSONSerialization.data(withJSONObject: tablesData, options: [])
-
-                // Decode the tables data into an array of Table objects
-                let updatedTables = try decoder.decode([String: Table].self, from: tablesJSONData)
-                    .map { $0.value }
+        client.observeTables { [self] result in
+            switch result {
+                
+            case .success(let data):
+                print("Response: \(String(describing: data))")
 
                 // Update the local tables property
-                self.tables = updatedTables
+                self.tables = data
                 self.delegate?.onTablesUpdated()
-            } catch {
-                // Handle error during decoding
-                print("Error decoding tables data:", error)
+                break
+            case .failure(let error):
+                print("Error: \(error)")
             }
         }
     }
     
     func joinTable(table: Table, user: User) {
-        if table.players?.count == 5 ||
-            table.players?.contains(where: { $0.userId == user.userId }) == true {
+        if table.playersCount == 5 {
             return
         }
         let index = tables?.firstIndex(where: { $0.tableID == table.tableID })

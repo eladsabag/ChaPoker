@@ -7,50 +7,43 @@
 
 import Foundation
 
-struct Table: Codable {
+class Table: Codable {
     let tableID: String
     let gameType: String
-    var players: [User]? // players that joined the table
-    var currentRoundPlayers: Array<User?>? // players that plays the round, changes during the game
-    var currentPlayerTurn: User? // the current player turn
+    var currentPlayerSeatTurn: Seat? // the current player turn
     let maxPlayers: Int // max allowed players
-    var playersCount: Int? // actual number of players joined table
-    var gameState: GameState?
+    var playersCount: Int // actual number of players joined table
+    var gameState: GameState
     var deck: Deck?
     var bigBlind: Int
     var smallBlind: Int
     var pot: Int
     var currentBet: Int
-    var bigBlindPlayer: User?
-    var smallBlindPlayer: User?
     var seats: [Seat]
+    var flop: [Card]?
+    var turn: Card?
+    var river: Card?
     
     init(tableID: String, gameType: String, maxPlayers: Int, bigBlind: Int) {
         self.tableID = tableID
         self.gameType = gameType
-        self.players = []
-        self.currentRoundPlayers = []
-        self.currentPlayerTurn = nil
+        self.currentPlayerSeatTurn = nil
         self.maxPlayers = maxPlayers
         self.playersCount = 0
         self.gameState = GameState.IDLE
-        self.deck = Deck()
+        self.deck = nil
         self.bigBlind = bigBlind
         self.smallBlind = bigBlind / 2
         self.pot = 0
         self.currentBet = 0
-        self.bigBlindPlayer = nil
-        self.smallBlindPlayer = nil
-        self.seats = (0..<maxPlayers).map { Seat(player: nil, seatIndex: $0) }
+        self.seats = (0..<maxPlayers).map { Seat(player: nil, seatIndex: $0, isBigBlind: false, isSmallBlind: false, lastAction: Action.CHECK) }
+        self.flop = []
+        self.turn = nil
+        self.river = nil
     }
     
-    mutating func addPlayer(_ player: User) {
-        if players == nil {
-            players = []
-        }
-        currentPlayerTurn = player
-        players?.append(player)
-        playersCount = players?.count
+    func addPlayer(_ player: User) {
+        playersCount += 1
         if let emptySeatIndex = seats.firstIndex(where: { $0.player == nil }) {
             seats[emptySeatIndex].player = player
         } else {
@@ -59,90 +52,143 @@ struct Table: Codable {
         }
     }
     
-    mutating func removePlayer(_ player: User) {
-        guard var players = players,
-              let index = players.firstIndex(where: { $0.userId == player.userId }) else {
-            return
-        }
-        
-        players.remove(at: index)
-        playersCount = players.count
+    func removePlayer(_ player: User) {
+        playersCount -= 1
         if let seatIndex = seats.firstIndex(where: { $0.player != nil && $0.player?.userId == player.userId }) {
             seats[seatIndex].player = nil
         } else {
             // Player not found, handle accordingly
             print("Player not found.")
         }
-        
-        if players.isEmpty {
-            self.players = nil
-        }
     }
     
-    mutating func startGame() {
-        if let players = players, players.count >= 2 {
-            currentPlayerTurn = players[0]
-            currentRoundPlayers = players
-            gameState = GameState.PREFLOP
-            deck?.loadDeckOfCards()
-            deck?.shuffle()
-            if currentRoundPlayers != nil && currentRoundPlayers?.isEmpty == false {
-                for i in 0...(currentRoundPlayers!.count * 2) {
-                    currentRoundPlayers![i]!.hand?.append(deck!.dealCard()!)
-                }
-            }
+    func startGame() {
+        if gameState == GameState.IDLE && playersCount >= 2 {
+            print("Starting game...")
+            changeGameState(state: GameState.PREFLOP)
         } else {
             print("Insufficient players to start the game.")
         }
     }
     
-    mutating func changeGameState(state: GameState) {
+    func changeGameState(state: GameState) {
         switch state {
         case GameState.IDLE:
-            // 1. Game isn't running yet, perform checks that everything is ready to start the game.
-            // 2. Everything ready -> start game, else -> keep performing this checks
-            // 3. Show pre-flop
-            gameState = GameState.PREFLOP
-            break
-        case GameState.PREFLOP:
-            // 1. Save current players to list of the players that in the hand
-            // 2. Deal hands
-            // 3. Check who has the Big Blind
-            // 4. Let the players that in decide their move
-            // 5. If someone raises then restart the turns
-            // 6. Turns finished, show flop.
-            if currentRoundPlayers?.count == 1 { // 1 Winner, everyone folded
-                gameState = GameState.IDLE
-            } else {
-                gameState = GameState.FLOP
-            }
-            break
-        case GameState.FLOP:
-            // Do the same but show turn
-            if currentRoundPlayers?.count == 1 { // 1 Winner, everyone folded
-                gameState = GameState.IDLE
-            } else {
-                gameState = GameState.TURN
-            }
-            break
-        case GameState.TURN:
-            // Do the same but show river
-            if currentRoundPlayers?.count == 1 { // 1 Winner, everyone folded
-                gameState = GameState.IDLE
-            } else {
-                gameState = GameState.RIVER
-            }
-            break
-        case GameState.RIVER:
-            // Do the same but remove all cards from tables
-            // 7. Determine winners
-            // 8. Give money to winner/s
             gameState = GameState.IDLE
             break
+        case GameState.PREFLOP:
+            gameState = GameState.PREFLOP
+            initGame()
+            break
+        case GameState.FLOP:
+            gameState = GameState.FLOP
+            dealFlop()
+            break
+        case GameState.TURN:
+            gameState = GameState.TURN
+            dealTurn()
+            break
+        case GameState.RIVER:
+            gameState = GameState.RIVER
+            dealRiver()
+            break
+        }
+        
+    }
+    
+    func initGame() {
+        resetPlayersMoves()
+        currentPlayerSeatTurn = seats.first(where: { $0.player != nil }) // TODO
+        flop = []
+        turn = nil
+        river = nil
+        deck = Deck()
+        deck?.loadDeckOfCards()
+        deck?.shuffle()
+        // deal hands to players
+        for seat in seats {
+            if !seat.isSeatEmpty() {
+                if seat.player?.hand == nil {
+                    seat.player?.hand = []
+                }
+                if let card = deck?.dealCard() {
+                    seat.player!.hand!.append(card)
+                } else {
+                    print("Card nil")
+                }
+            }
+        }
+        for seat in seats {
+            if !seat.isSeatEmpty() {
+                if seat.player?.hand == nil {
+                    seat.player?.hand = []
+                }
+                seat.player!.hand?.append(deck!.dealCard()!)
+            }
+        }
+        // TODO init seats for big, small blinds, and round end seat
+        currentPlayerSeatTurn?.isRoundEndSeat = true
+    }
+    
+    func resetPlayersMoves() {
+        for seat in seats {
+            seat.lastAction = Action.CHECK
         }
     }
     
-    func abortGame() {
-        
+    func updateRoundState(action: Action) {
+        currentPlayerSeatTurn?.lastAction = action
+        currentPlayerSeatTurn = findNextSeat()
+        switch(action) {
+        case Action.CHECK:
+            break
+        case Action.CALL:
+            break
+        case Action.BET:
+            break
+        case Action.FOLD:
+            break
+        }
+        if let isEnd = currentPlayerSeatTurn?.isRoundEndSeat, isEnd {
+            // TODO
+            let state = gameState == GameState.PREFLOP ? GameState.FLOP : gameState == GameState.FLOP ? GameState.TURN : gameState == GameState.TURN ? GameState.RIVER : gameState == GameState.RIVER ? GameState.IDLE : GameState.PREFLOP
+            changeGameState(state: state)
+        }
+    }
+    
+    func findNextSeat() -> Seat? {
+        let mySeatIndex = currentPlayerSeatTurn?.seatIndex
+        var currentIndex = (mySeatIndex! + 1) % seats.count  // Starting index
+
+        while currentIndex != mySeatIndex {
+            let seat = seats[currentIndex]
+
+            if seat.isInGame() && seat.isSeatEmpty() == false {
+                return seat
+            }
+
+            currentIndex = (currentIndex + 1) % seats.count  // Move to the next index
+        }
+
+        return nil  // If no seat is found
+    }
+    
+    func dealFlop() {
+        flop = []
+        let burnedCard = deck?.dealCard() // burned card
+        for _ in 0..<3 {
+            let flopCard = deck?.dealCard()
+            flop?.append(flopCard!)
+        }
+    }
+    
+    func dealTurn() {
+        let burnedCard = deck?.dealCard() // burned card
+        turn = deck?.dealCard()!
+    }
+    
+    func dealRiver() {
+        let burnedCard = deck?.dealCard() // burned card
+        river = deck?.dealCard()!
     }
 }

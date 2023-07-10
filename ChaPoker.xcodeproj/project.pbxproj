@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		831658812A59605400368B7A /* NetworkMontior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831658802A59605400368B7A /* NetworkMontior.swift */; };
+		83322BF82A5C2C6000AC1112 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83322BF72A5C2C6000AC1112 /* Constants.swift */; };
+		83322BFF2A5C317900AC1112 /* GameTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83322BFD2A5C317900AC1112 /* GameTableCell.swift */; };
+		83322C002A5C317900AC1112 /* GameTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83322BFE2A5C317900AC1112 /* GameTableCell.xib */; };
 		8334A0F92A52185F00758D7B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8334A0F82A52185F00758D7B /* GameState.swift */; };
 		833573332A5862630038A1F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 833573322A5862630038A1F2 /* GoogleService-Info.plist */; };
 		833573352A58A6B10038A1F2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573342A58A6B10038A1F2 /* Action.swift */; };
@@ -88,6 +92,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		831658802A59605400368B7A /* NetworkMontior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMontior.swift; sourceTree = "<group>"; };
+		83322BF72A5C2C6000AC1112 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83322BFD2A5C317900AC1112 /* GameTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableCell.swift; sourceTree = "<group>"; };
+		83322BFE2A5C317900AC1112 /* GameTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameTableCell.xib; sourceTree = "<group>"; };
 		8334A0F82A52185F00758D7B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		833573322A5862630038A1F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		833573342A58A6B10038A1F2 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -238,15 +246,15 @@
 		83967F472A4E3FF1000694B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8346B7752A4EC0800066B315 /* GameManager.swift */,
+				8346B7792A5020220066B315 /* LoginManager.swift */,
+				83E54A9B2A503652001CE69D /* HomeManager.swift */,
 				83967F4B2A4E4110000694B8 /* User.swift */,
 				83967F4D2A4E4122000694B8 /* Card.swift */,
 				83967F4F2A4E413D000694B8 /* Rank.swift */,
 				83967F512A4E4157000694B8 /* Suit.swift */,
 				83967F532A4E44B9000694B8 /* Deck.swift */,
 				8346B7732A4EBF3A0066B315 /* Table.swift */,
-				8346B7752A4EC0800066B315 /* GameManager.swift */,
-				8346B7792A5020220066B315 /* LoginManager.swift */,
-				83E54A9B2A503652001CE69D /* HomeManager.swift */,
 				8334A0F82A52185F00758D7B /* GameState.swift */,
 				833573342A58A6B10038A1F2 /* Action.swift */,
 				833573362A58C10C0038A1F2 /* Seat.swift */,
@@ -258,6 +266,8 @@
 			isa = PBXGroup;
 			children = (
 				83448CE42A4DE0CA0066CE99 /* Main.storyboard */,
+				83322BFD2A5C317900AC1112 /* GameTableCell.swift */,
+				83322BFE2A5C317900AC1112 /* GameTableCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -278,6 +288,8 @@
 				83448D582A4DF94E0066CE99 /* UserDefaultsManager.swift */,
 				8373165E2A54BB72003202F5 /* GameValidator.swift */,
 				833573382A58D1D80038A1F2 /* Tester.swift */,
+				831658802A59605400368B7A /* NetworkMontior.swift */,
+				83322BF72A5C2C6000AC1112 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -435,6 +447,7 @@
 			files = (
 				83448CEB2A4DE0CB0066CE99 /* LaunchScreen.storyboard in Resources */,
 				833573332A5862630038A1F2 /* GoogleService-Info.plist in Resources */,
+				83322C002A5C317900AC1112 /* GameTableCell.xib in Resources */,
 				83448CE82A4DE0CB0066CE99 /* Assets.xcassets in Resources */,
 				83448CE62A4DE0CA0066CE99 /* Main.storyboard in Resources */,
 			);
@@ -467,13 +480,16 @@
 				83448CE32A4DE0CA0066CE99 /* LoginViewController.swift in Sources */,
 				83967F502A4E413D000694B8 /* Rank.swift in Sources */,
 				83967F542A4E44B9000694B8 /* Deck.swift in Sources */,
+				83322BF82A5C2C6000AC1112 /* Constants.swift in Sources */,
 				833573392A58D1D80038A1F2 /* Tester.swift in Sources */,
+				83322BFF2A5C317900AC1112 /* GameTableCell.swift in Sources */,
 				83448D592A4DF94E0066CE99 /* UserDefaultsManager.swift in Sources */,
 				8346B77A2A5020220066B315 /* LoginManager.swift in Sources */,
 				83967F572A4E4690000694B8 /* NetworkManager.swift in Sources */,
 				8334A0F92A52185F00758D7B /* GameState.swift in Sources */,
 				83967F4E2A4E4122000694B8 /* Card.swift in Sources */,
 				8373165F2A54BB72003202F5 /* GameValidator.swift in Sources */,
+				831658812A59605400368B7A /* NetworkMontior.swift in Sources */,
 				8346B7742A4EBF3A0066B315 /* Table.swift in Sources */,
 				83967F4C2A4E4110000694B8 /* User.swift in Sources */,
 				83448CDF2A4DE0CA0066CE99 /* AppDelegate.swift in Sources */,

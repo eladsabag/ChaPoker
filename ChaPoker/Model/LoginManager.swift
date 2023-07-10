@@ -32,8 +32,8 @@ class LoginManager {
         }
     }
     
-    func getUser() {
-        client.fetchCurrentUser { result in
+    func getUser(userId: String) {
+        client.fetchCurrentUser(userId: userId) { result in
             switch result {
             case .success(let data):
                 // Handle successful response

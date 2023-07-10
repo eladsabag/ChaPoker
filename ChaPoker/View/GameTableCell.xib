@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="240" id="KGk-i7-Jjw" customClass="GameTableCell" customModule="ChaPoker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="156" height="196"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="156" height="196"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-tD-iUr">
+                        <rect key="frame" x="0.0" y="40" width="156" height="156"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Texas Holdem" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cL-8x-pJV">
+                        <rect key="frame" x="0.0" y="11" width="156" height="21"/>
+                        <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="17"/>
+                        <color key="textColor" name="AccentColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7o-7y-YJL">
+                        <rect key="frame" x="9" y="167" width="139" height="21"/>
+                        <color key="tintColor" name="AccentColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="tinted">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Join Table(0/5)">
+                                    <attributes>
+                                        <font key="NSFont" size="16" name="Papyrus"/>
+                                        <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Akc-tD-iUr" firstAttribute="top" secondItem="5cL-8x-pJV" secondAttribute="bottom" constant="8" id="3Es-bD-3cK"/>
+                    <constraint firstItem="y7o-7y-YJL" firstAttribute="top" secondItem="5cL-8x-pJV" secondAttribute="bottom" constant="115" id="6ju-TD-CxW"/>
+                    <constraint firstAttribute="trailing" secondItem="y7o-7y-YJL" secondAttribute="trailing" constant="40" id="7nN-xm-Cmc"/>
+                    <constraint firstAttribute="bottom" secondItem="y7o-7y-YJL" secondAttribute="bottom" constant="14" id="Bb3-L4-Wpi"/>
+                    <constraint firstAttribute="trailing" secondItem="Akc-tD-iUr" secondAttribute="trailing" id="TPS-ar-I1s"/>
+                    <constraint firstItem="5cL-8x-pJV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="57" id="W3O-tC-1DE"/>
+                    <constraint firstAttribute="bottom" secondItem="Akc-tD-iUr" secondAttribute="bottom" id="WyC-6E-BgN"/>
+                    <constraint firstAttribute="bottom" secondItem="y7o-7y-YJL" secondAttribute="bottom" constant="8" id="YkM-QU-rB8"/>
+                    <constraint firstItem="Akc-tD-iUr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZxN-Py-NUa"/>
+                    <constraint firstItem="5cL-8x-pJV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="dMb-EF-pvv"/>
+                    <constraint firstAttribute="trailing" secondItem="5cL-8x-pJV" secondAttribute="trailing" constant="57" id="oiw-9P-Ci0"/>
+                    <constraint firstItem="y7o-7y-YJL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="41" id="sUd-6O-YQm"/>
+                    <constraint firstItem="Akc-tD-iUr" firstAttribute="top" secondItem="5cL-8x-pJV" secondAttribute="bottom" constant="8" id="sWs-5n-yPw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="joinTableBtn" destination="y7o-7y-YJL" id="gAO-wL-5S2"/>
+                <outlet property="tableModeImg" destination="Akc-tD-iUr" id="YlH-iJ-leU"/>
+                <outlet property="tableModeLabel" destination="5cL-8x-pJV" id="1px-6r-9zB"/>
+            </connections>
+            <point key="canvasLocation" x="70.229007633587784" y="59.859154929577471"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

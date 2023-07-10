@@ -16,11 +16,12 @@ class Deck : Codable {
     
     func loadDeckOfCards() {
         cards = []
-        
+        print("load deck of cards")
         // Create a deck with all possible cards
         for suit in Suit.allCases {
             for rank in Rank.allCases {
                 let card = Card(rank: rank, suit: suit)
+                print("Added card \(card.description)")
                 cards.append(card)
             }
         }
@@ -32,6 +33,7 @@ class Deck : Codable {
     
     func dealCard() -> Card? {
         if let card = cards.popLast() {
+            print(card.description)
             return card
         }
         return nil
