@@ -43,6 +43,11 @@ class GameViewController: UIViewController {
     @IBOutlet weak var rightPlayerPotLabel: UILabel!
     @IBOutlet weak var playerTurnLabel: UILabel!
     @IBOutlet weak var turnTimeLabel: UILabel!
+    @IBOutlet weak var leftPlayerPaymentLabel: UILabel!
+    @IBOutlet weak var leftMiddlePlayerPaymentLabel: UILabel!
+    @IBOutlet weak var middlePlayerPaymentLabel: UILabel!
+    @IBOutlet weak var rightMiddlePlayerPaymentLabel: UILabel!
+    @IBOutlet weak var rightPlayerPaymentLabel: UILabel!
     
     var gameManager: GameManager?
     var table: Table?
@@ -299,6 +304,37 @@ class GameViewController: UIViewController {
         //TODO
     }
     
+    func initPlayersPaymentLabels() {
+        if let seats = gameManager?.table.seats {
+            for seat in seats {
+                var lbl: UILabel? = nil
+                switch(seat.seatIndex) {
+                case 0:
+                    lbl = leftPlayerPaymentLabel
+                    break
+                case 1:
+                    lbl = leftMiddlePlayerPaymentLabel
+                    break
+                case 2:
+                    lbl = middlePlayerPotLabel
+                    break
+                case 3:
+                    lbl = rightMiddlePlayerPaymentLabel
+                    break
+                case 4:
+                    lbl = rightPlayerPaymentLabel
+                    break
+                default:
+                    break
+                }
+                lbl?.isHidden = !seat.isInGame() || seat.roundPayment == 0
+                if seat.isInGame() {
+                    lbl?.text = "\(seat.roundPayment)$"
+                }
+            }
+        }
+    }
+    
     func updateUI() {
         // 1. leave table button - always show ✓
         // 2. blind label - always show ✓
@@ -314,6 +350,7 @@ class GameViewController: UIViewController {
         // 12. round pot label - set to current round pot or 0 - always show
         // 13. player turn label - set to current player first name and show if game is not idle - show
         // 14. player turn timer - set to 30 seconds when game is running, and my turn - show
+        // 15. player payment label - payment value - always show
         initProfileImages()
         initPlayersChipsLabels()
         initPlayersCards() // TODO add round ends
@@ -322,6 +359,7 @@ class GameViewController: UIViewController {
         initRoundPot()
         initPlayerTurnLabel()
         initPlayerTimer()
+        initPlayersPaymentLabels()
     }
 }
 

@@ -92,13 +92,15 @@ class Table: Codable {
             gameState = GameState.RIVER
             dealRiver()
             break
+        case GameState.REWARDS:
+            gameState = GameState.REWARDS
+            determineWinners()
+            break
         }
         
     }
     
     func initGame() {
-        resetPlayersMoves()
-        currentPlayerSeatTurn = seats.first(where: { $0.player != nil }) // TODO
         flop = []
         turn = nil
         river = nil
@@ -113,8 +115,6 @@ class Table: Codable {
                 }
                 if let card = deck?.dealCard() {
                     seat.player!.hand!.append(card)
-                } else {
-                    print("Card nil")
                 }
             }
         }
@@ -126,7 +126,77 @@ class Table: Codable {
                 seat.player!.hand?.append(deck!.dealCard()!)
             }
         }
-        // TODO init seats for big, small blinds, and round end seat
+        resetPlayersMoves()
+        resetPot()
+        initSeatBigAndSmallBlinds()
+        initCurrentRoundPlayerTurn()
+        initRoundEndSeat()
+    }
+    
+    /*
+     This function init the current round seat big blind and small blind.
+     If there isn't any record of previous big and small blind seats then it chooses
+     the first and seconds seats as the big and small blinds.
+     Additionally, it sets the initial current player turn,
+     which is the seat after big blind.
+     */
+    func initSeatBigAndSmallBlinds() {
+        let seatBigBlind = seats.first(where: { $0.isBigBlind })
+        if seatBigBlind == nil {
+            seats[0].isSmallBlind = true
+            seats[1].isBigBlind = true
+            makePayment(seatIndex: 0, payment: 1)
+            makePayment(seatIndex: 1, payment: 2)
+            return
+        }
+        
+        var lastSeatIndex = -1
+        let lastIndex = seats.count - 1
+        for (i, seat) in seats.enumerated() {
+            if seat.isBigBlind {
+                seats[i].isBigBlind = false
+                seats[i].isSmallBlind = true
+                makePayment(seatIndex: i, payment: 1)
+                
+                let resetIndex = lastSeatIndex == -1 ? lastIndex : i - 1
+                seats[resetIndex].isBigBlind = false
+                seats[resetIndex].isSmallBlind = false
+                
+                let nextBigBlindIndex = i + 1 > lastIndex ? 0 : i + 1
+                seats[nextBigBlindIndex].isBigBlind = true
+                seats[nextBigBlindIndex].isSmallBlind = false
+                makePayment(seatIndex: i, payment: 2)
+            }
+            lastSeatIndex = i
+        }
+    }
+    
+    /*
+     This function will set the next seat after big blind as the current
+     round player turn, and can be reusable every round initialization.
+     */
+    func initCurrentRoundPlayerTurn() {
+        if currentPlayerSeatTurn == nil {
+            if playersCount == 2 {
+                currentPlayerSeatTurn = seats[0]
+            } else {
+                currentPlayerSeatTurn = seats[2]
+            }
+            return
+        }
+        
+        let lastIndex = seats.count - 1
+        for (i, seat) in seats.enumerated() {
+            if seat.isBigBlind {
+                let nextBigBlindIndex = i + 1 > lastIndex ? 0 : i + 1
+                let currentPlayerTurnIndex = nextBigBlindIndex + 1 > lastIndex ? 0 : i + 1
+                currentPlayerSeatTurn = seats[currentPlayerTurnIndex]
+            }
+        }
+    }
+    
+    func initRoundEndSeat() {
+        // TODO
         currentPlayerSeatTurn?.isRoundEndSeat = true
     }
     
@@ -136,22 +206,41 @@ class Table: Codable {
         }
     }
     
+    func resetPlayersRoundPayment() {
+        for seat in seats {
+            seat.roundPayment = 0
+        }
+    }
+    
+    func resetPot() {
+        pot = 0
+    }
+    
     func updateRoundState(action: Action) {
         currentPlayerSeatTurn?.lastAction = action
         currentPlayerSeatTurn = findNextSeat()
         switch(action) {
         case Action.CHECK:
+            // Do nothing
             break
         case Action.CALL:
+            // Charge player payment
+            // Update pot
             break
         case Action.BET:
+            // Charge player payment
+            // Update current bet
+            // Update current round end seat
+            // Update pot
             break
         case Action.FOLD:
             break
         }
         if let isEnd = currentPlayerSeatTurn?.isRoundEndSeat, isEnd {
-            // TODO
-            let state = gameState == GameState.PREFLOP ? GameState.FLOP : gameState == GameState.FLOP ? GameState.TURN : gameState == GameState.TURN ? GameState.RIVER : gameState == GameState.RIVER ? GameState.IDLE : GameState.PREFLOP
+            let state = gameState == GameState.IDLE ? GameState.PREFLOP :
+                        gameState == GameState.PREFLOP ? GameState.FLOP :
+                        gameState == GameState.FLOP ? GameState.TURN :
+                        gameState == GameState.TURN ? GameState.RIVER : GameState.IDLE
             changeGameState(state: state)
         }
     }
@@ -190,5 +279,36 @@ class Table: Codable {
     func dealRiver() {
         let burnedCard = deck?.dealCard() // burned card
         river = deck?.dealCard()!
+    }
+    
+    func determineWinners() {
+        var hands: [(hand: [Card], description: String)] = []
+        for seat in seats {
+            if seat.isInGame() {
+                let playerHand = seat.player?.hand
+                let playerStrongestHand = GameValidator.findStrongestHand(flop: flop!, turn: turn!, river: river!, hand: playerHand!)
+                print("Player \(seat.player!.name) Strongest Hand: \(playerStrongestHand)")
+                hands.append(playerStrongestHand)
+            }
+        }
+
+        let winners = GameValidator.determineWinners(hands.map { $0.hand })
+        // TODO split money
+        if winners.count == 1 {
+            print("Player \(winners[0] + 1) is the winner!")
+        } else if winners.count > 1 {
+            print("It's a tie between players: \(winners.map { $0 + 1 })")
+        } else {
+            print("No winners found.")
+        }
+    }
+    
+    func makePayment(seatIndex: Int, payment: Int) {
+        if seatIndex < seats.count {
+            pot += payment
+
+            seats[seatIndex].player?.chips -= payment
+            seats[seatIndex].roundPayment += payment
+        }
     }
 }

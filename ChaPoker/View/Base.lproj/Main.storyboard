@@ -409,6 +409,34 @@
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCW-4j-pIF">
+                                <rect key="frame" x="233" y="189" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI2-hE-lOB">
+                                <rect key="frame" x="253" y="238" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOm-vq-pJa">
+                                <rect key="frame" x="392" y="238" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcJ-HY-MgC">
+                                <rect key="frame" x="536" y="238" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aW9-h8-2y8">
                                 <rect key="frame" x="639" y="163" width="72" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -483,6 +511,13 @@
                                 <rect key="frame" x="273" y="292" width="42" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XjD-Sw-5vq">
+                                <rect key="frame" x="580" y="189" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gnV-jW-zjP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -509,12 +544,15 @@
                         <outlet property="leftMiddleCardImg1" destination="0ei-fO-38i" id="9ib-tG-mM8"/>
                         <outlet property="leftMiddleCardImg2" destination="fHJ-EU-jNM" id="v1w-0x-z7y"/>
                         <outlet property="leftMiddlePlayerImg" destination="oRd-Sk-h07" id="9qW-XL-GDK"/>
+                        <outlet property="leftMiddlePlayerPaymentLabel" destination="EI2-hE-lOB" id="br8-ct-JeZ"/>
                         <outlet property="leftMiddlePlayerPotLabel" destination="cVV-HR-JBW" id="v8y-uz-qbU"/>
                         <outlet property="leftPlayerImg" destination="IeM-bm-t66" id="elE-fZ-h6K"/>
+                        <outlet property="leftPlayerPaymentLabel" destination="lCW-4j-pIF" id="mxE-3I-hwu"/>
                         <outlet property="leftPlayerPotLabel" destination="T2i-ca-qh4" id="iaI-D8-Zaf"/>
                         <outlet property="middleCardImg1" destination="mfR-Pb-des" id="K6h-XM-DSS"/>
                         <outlet property="middleCardImg2" destination="RQO-Gv-w9z" id="qP4-Gk-vrE"/>
                         <outlet property="middlePlayerImg" destination="WNQ-cc-eYf" id="AlY-Y0-dhk"/>
+                        <outlet property="middlePlayerPaymentLabel" destination="cOm-vq-pJa" id="AGx-jM-6Ff"/>
                         <outlet property="middlePlayerPotLabel" destination="Njh-hK-YN2" id="iB7-UZ-Pbe"/>
                         <outlet property="playerTurnLabel" destination="dGE-Nh-Vv8" id="cwS-Pr-oVa"/>
                         <outlet property="potLabel" destination="ax0-g1-ma7" id="VZT-bq-hC2"/>
@@ -523,8 +561,10 @@
                         <outlet property="rightMiddleCardImg1" destination="fG0-EI-db4" id="FDa-Bw-AUp"/>
                         <outlet property="rightMiddleCardImg2" destination="eYO-UH-Uoq" id="Okr-AB-TGw"/>
                         <outlet property="rightMiddlePlayerImg" destination="FdN-d8-cmF" id="OuT-6X-cyu"/>
+                        <outlet property="rightMiddlePlayerPaymentLabel" destination="lcJ-HY-MgC" id="myF-Zr-NSk"/>
                         <outlet property="rightMiddlePlayerPotLabel" destination="EEJ-uW-S32" id="ykm-Un-Yfn"/>
                         <outlet property="rightPlayerImg" destination="aW9-h8-2y8" id="Dsb-WZ-52M"/>
+                        <outlet property="rightPlayerPaymentLabel" destination="XjD-Sw-5vq" id="lkh-XG-n2a"/>
                         <outlet property="rightPlayerPotLabel" destination="Fr6-cf-pwr" id="rPi-bc-8P6"/>
                         <outlet property="riverImg" destination="wIH-sn-lWb" id="fnx-Wu-PKz"/>
                         <outlet property="turnImg" destination="ccn-pX-Du3" id="EKI-PJ-a0C"/>

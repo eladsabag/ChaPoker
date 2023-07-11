@@ -13,4 +13,5 @@ enum GameState : String, Codable {
     case FLOP = "FLOP"
     case TURN = "TURN"
     case RIVER = "RIVER"
+    case REWARDS = "REWARDS"
 }
