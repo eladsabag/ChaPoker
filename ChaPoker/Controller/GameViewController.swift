@@ -88,8 +88,13 @@ class GameViewController: UIViewController {
     }
 
     @IBAction func checkPressed(_ sender: UIButton) {
-        if gameManager!.isSomeoneMadeBet() || !gameManager!.isInGame() {
+        if !gameManager!.isInGame() {
             return
+        }
+        if gameManager!.isSomeoneMadeBet() {
+            if !gameManager!.isPayed() {
+                return
+            }
         }
         gameManager?.updateRoundState(action: Action.CHECK)
     }
@@ -242,13 +247,15 @@ class GameViewController: UIViewController {
     
     func initPlayerMoves() {
         let isMyTurn = gameManager?.isMyTurn() ?? false
-        checkButton.isHidden = !isMyTurn
-        callButton.isHidden = !isMyTurn
-        betButton.isHidden = !isMyTurn
-        foldButton.isHidden = !isMyTurn
-        betSlider.isHidden = !isMyTurn
-        betLabel.isHidden = !isMyTurn
+        let isRewards = gameManager?.table.gameState == GameState.REWARDS
+        checkButton.isHidden = !isMyTurn || isRewards
+        callButton.isHidden = !isMyTurn || isRewards
+        betButton.isHidden = !isMyTurn || isRewards
+        foldButton.isHidden = !isMyTurn || isRewards
+        betSlider.isHidden = !isMyTurn || isRewards
+        betLabel.isHidden = !isMyTurn || isRewards
         if isMyTurn,
+           !isRewards,
             let table = gameManager?.table, let currentPlayer = table.currentPlayerSeatTurn?.player {
             // TODO
             betSlider.minimumValue = table.currentBet > table.bigBlind ? Float(table.currentBet * 2) : Float(table.bigBlind)
@@ -336,6 +343,16 @@ class GameViewController: UIViewController {
     }
     
     func updateUI() {
+        if gameManager?.table.gameState == GameState.REWARDS {
+            if let winnerDetails = gameManager?.table.winnerDetails {
+                showToast(message: winnerDetails)
+            }
+            if gameManager!.isMyTurn() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.gameManager?.updateRoundState(action: Action.IDLE)
+                }
+            }
+        }
         // 1. leave table button - always show ✓
         // 2. blind label - always show ✓
         // 3. pot label - always show ✓
@@ -361,6 +378,25 @@ class GameViewController: UIViewController {
         initPlayerTimer()
         initPlayersPaymentLabels()
     }
+    
+    func showToast(message: String, duration: TimeInterval = 2.0) {
+        let toastLabel = UILabel(frame: CGRect(x: 30, y: self.view.frame.size.height-100, width: self.view.frame.size.width - 60, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center
+        toastLabel.font = UIFont.systemFont(ofSize: 14)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+
+        UIView.animate(withDuration: 0.5, delay: duration, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { _ in
+            toastLabel.removeFromSuperview()
+        })
+    }
 }
 
 extension GameViewController: GameManagerDelegate {
@@ -372,7 +408,6 @@ extension GameViewController: GameManagerDelegate {
     }
     
     func onTableUpdated() {
-        print("onTablesUpdated")
         DispatchQueue.main.async {
             self.updateUI()
             self.gameManager?.startGameIfNotPlaying()

@@ -73,7 +73,7 @@ class GameValidator {
     }
     
     private static func calculateHandRankValue(_ hand: [Card]) -> Int {
-        let sortedHand = hand.sorted { $0.rank.value < $1.rank.value }
+        let sortedHand = hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
         if isRoyalFlush(sortedHand) {
             return 10
         } else if isStraightFlush(sortedHand) {
@@ -167,23 +167,24 @@ class GameValidator {
         return rankCounts
     }
     
-    static func determineWinners(_ hands: [[Card]]) -> [Int] {
-        var winners: [Int] = []
+    static func determineWinners(_ handsMap: [Int: (hand: [Card], description: String)]) -> [(seatIndex: Int, hand: [Card])] {
+        var winners: [(seatIndex: Int, hand: [Card])] = []
         var maxRankValue = 0
         
         // Find the maximum rank value among all the hands
-        for (_, hand) in hands.enumerated() {
-            let rankValue = calculateHandRankValue(hand)
+        for (_, handDescription) in handsMap {
+            let rankValue = calculateHandRankValue(handDescription.hand)
             if rankValue > maxRankValue {
                 maxRankValue = rankValue
             }
         }
         
-        // Find the indices of the hands with the maximum rank value (potential winners)
-        for (index, hand) in hands.enumerated() {
-            let rankValue = calculateHandRankValue(hand)
+        // Find the hands with the maximum rank value (potential winners) and add them to the winners array
+        for (seatIndex, handDescription) in handsMap {
+            let rankValue = calculateHandRankValue(handDescription.hand)
             if rankValue == maxRankValue {
-                winners.append(index)
+                let winner: (seatIndex: Int, hand: [Card]) = (seatIndex, handDescription.hand)
+                winners.append(winner)
             }
         }
         

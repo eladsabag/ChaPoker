@@ -85,6 +85,9 @@ class HomeViewController: UIViewController {
     }
     
     func updateUI() {
+        if homeManager?.tables == nil || homeManager!.tables!.isEmpty || homeManager!.tables!.count < 3 {
+            return
+        }
         if let table1 = homeManager?.tables?[0], let table2 = homeManager?.tables?[1], let table3 = homeManager?.tables?[2]  {
             texasCountLabel.text = "\(table1.playersCount)/\(table1.maxPlayers)"
             pineappleCountLabel.text = "\(table2.playersCount)/\(table2.maxPlayers)"
@@ -96,7 +99,7 @@ class HomeViewController: UIViewController {
 
 
     @IBAction func joinTexasPressed(_ sender: Any) {
-        if let table1 = homeManager?.tables?[0] {
+        if let table1 = homeManager?.tables?[0], ((homeManager?.isJoined(index: 0)) != nil) {
             homeManager?.joinTable(table: table1, user: user!)
         } else {
             print("Didn't join table")
@@ -104,7 +107,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func joinPineapplePressed(_ sender: Any) {
-        if let table2 = homeManager?.tables?[1] {
+        if let table2 = homeManager?.tables?[1], ((homeManager?.isJoined(index: 1)) != nil) {
             homeManager?.joinTable(table: table2, user: user!)
         } else {
             print("Didn't join table")
@@ -112,7 +115,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func joinChocoPressed(_ sender: Any) {
-        if let table3 = homeManager?.tables?[2] {
+        if let table3 = homeManager?.tables?[2], ((homeManager?.isJoined(index: 2)) != nil) {
             homeManager?.joinTable(table: table3, user: user!)
         } else {
             print("Didn't join table")
@@ -149,7 +152,6 @@ extension HomeViewController: LoginButtonDelegate {
 extension HomeViewController: HomeManagerDelegate {
     
     func onTablesUpdated() {
-        print("onTablesUpdated")
         DispatchQueue.main.async {
             self.updateUI()
         }

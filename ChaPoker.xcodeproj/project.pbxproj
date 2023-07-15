@@ -12,7 +12,6 @@
 		83322BFF2A5C317900AC1112 /* GameTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83322BFD2A5C317900AC1112 /* GameTableCell.swift */; };
 		83322C002A5C317900AC1112 /* GameTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83322BFE2A5C317900AC1112 /* GameTableCell.xib */; };
 		8334A0F92A52185F00758D7B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8334A0F82A52185F00758D7B /* GameState.swift */; };
-		833573332A5862630038A1F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 833573322A5862630038A1F2 /* GoogleService-Info.plist */; };
 		833573352A58A6B10038A1F2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573342A58A6B10038A1F2 /* Action.swift */; };
 		833573372A58C10C0038A1F2 /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573362A58C10C0038A1F2 /* Seat.swift */; };
 		833573392A58D1D80038A1F2 /* Tester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573382A58D1D80038A1F2 /* Tester.swift */; };
@@ -71,6 +70,7 @@
 		83967F522A4E4157000694B8 /* Suit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83967F512A4E4157000694B8 /* Suit.swift */; };
 		83967F542A4E44B9000694B8 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83967F532A4E44B9000694B8 /* Deck.swift */; };
 		83967F572A4E4690000694B8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83967F562A4E4690000694B8 /* NetworkManager.swift */; };
+		83B4F8CA2A61378700EB4E78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83B4F8C92A61378700EB4E78 /* GoogleService-Info.plist */; };
 		83E54A9C2A503652001CE69D /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E54A9B2A503652001CE69D /* HomeManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,7 +97,6 @@
 		83322BFD2A5C317900AC1112 /* GameTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableCell.swift; sourceTree = "<group>"; };
 		83322BFE2A5C317900AC1112 /* GameTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameTableCell.xib; sourceTree = "<group>"; };
 		8334A0F82A52185F00758D7B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
-		833573322A5862630038A1F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		833573342A58A6B10038A1F2 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		833573362A58C10C0038A1F2 /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
 		833573382A58D1D80038A1F2 /* Tester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tester.swift; sourceTree = "<group>"; };
@@ -127,6 +126,7 @@
 		83967F512A4E4157000694B8 /* Suit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suit.swift; sourceTree = "<group>"; };
 		83967F532A4E44B9000694B8 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		83967F562A4E4690000694B8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		83B4F8C92A61378700EB4E78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		83E54A9B2A503652001CE69D /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,8 +219,8 @@
 				83448CDE2A4DE0CA0066CE99 /* AppDelegate.swift */,
 				83448CE02A4DE0CA0066CE99 /* SceneDelegate.swift */,
 				83448CE72A4DE0CB0066CE99 /* Assets.xcassets */,
+				83B4F8C92A61378700EB4E78 /* GoogleService-Info.plist */,
 				83448CE92A4DE0CB0066CE99 /* LaunchScreen.storyboard */,
-				833573322A5862630038A1F2 /* GoogleService-Info.plist */,
 				83448CEC2A4DE0CB0066CE99 /* Info.plist */,
 			);
 			path = ChaPoker;
@@ -446,8 +446,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				83448CEB2A4DE0CB0066CE99 /* LaunchScreen.storyboard in Resources */,
-				833573332A5862630038A1F2 /* GoogleService-Info.plist in Resources */,
 				83322C002A5C317900AC1112 /* GameTableCell.xib in Resources */,
+				83B4F8CA2A61378700EB4E78 /* GoogleService-Info.plist in Resources */,
 				83448CE82A4DE0CB0066CE99 /* Assets.xcassets in Resources */,
 				83448CE62A4DE0CA0066CE99 /* Main.storyboard in Resources */,
 			);

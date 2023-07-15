@@ -8,6 +8,7 @@
 import Foundation
 
 enum Action: String, Codable {
+    case IDLE = "IDLE"
     case CHECK = "CHECK"
     case CALL = "CALL"
     case BET = "BET"

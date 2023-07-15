@@ -14,6 +14,7 @@ class Seat: Codable {
     var isSmallBlind: Bool
     var lastAction: Action
     var roundPayment: Int
+    var totalPayment: Int
     var isRoundEndSeat: Bool
     
     init(player: User? = nil, seatIndex: Int, isBigBlind: Bool, isSmallBlind: Bool, lastAction: Action = Action.CHECK) {
@@ -23,6 +24,7 @@ class Seat: Codable {
         self.isSmallBlind = isSmallBlind
         self.lastAction = lastAction
         self.roundPayment = 0
+        self.totalPayment = 0
         self.isRoundEndSeat = false
     }
     

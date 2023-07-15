@@ -170,15 +170,17 @@ extension LoginViewController: LoginButtonDelegate {
             print(error.localizedDescription)
             return
           }
-        let credential = FacebookAuthProvider
-          .credential(withAccessToken: AccessToken.current!.tokenString)
-        Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-                         print("Facebook authentication with Firebase error: ", error)
-                         return
-                     }
-            print("Login success!")
-            self.initUserFromGraph()
+        if let accessTokenString = AccessToken.current?.tokenString {
+            let credential = FacebookAuthProvider
+              .credential(withAccessToken: accessTokenString)
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                             print("Facebook authentication with Firebase error: ", error)
+                             return
+                         }
+                print("Login success!")
+                self.initUserFromGraph()
+            }
         }
     }
     

@@ -13,9 +13,11 @@ class NetworkManager {
     static let shared = NetworkManager()
     static let baseUrl = "https://chapoker-ed624-default-rtdb.firebaseio.com/"
     var tablesReference: DatabaseReference!
+    var usersReference: DatabaseReference!
 
     private init() {
         tablesReference = Database.database().reference().child("tables")
+        usersReference = Database.database().reference().child("users")
         initTables()
     }
     
@@ -292,6 +294,26 @@ class NetworkManager {
                 // User's last active timestamp is missing or invalid
                 // Return false for an unknown connectivity status
                 completion(false)
+            }
+        }
+    }
+    
+    func updateUserChips(userId: String, newChipsValue: Int, completion: @escaping (Result<Data, Error>) -> Void) {
+        let userRef = usersReference.child(userId)
+
+        userRef.updateChildValues(["chips": newChipsValue]) { (error, _) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                // Fetch the updated data to provide it in the completion block.
+                userRef.observeSingleEvent(of: .value) { (snapshot) in
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: snapshot.value as Any, options: [])
+                        completion(.success(jsonData))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
             }
         }
     }

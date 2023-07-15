@@ -77,4 +77,9 @@ class HomeManager {
             }
         }
     }
+    
+    func isJoined(index: Int) -> Bool {
+        let isJoined = tables?[index].seats.first(where: { $0.isMySeat(userId: user!.userId) })
+        return isJoined != nil
+    }
 }

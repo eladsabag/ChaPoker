@@ -106,6 +106,13 @@ class GameManager {
         return false
     }
     
+    func isPayed() -> Bool {
+        if table.currentPlayerSeatTurn?.roundPayment == table.currentBet { // TODO handle half payment(ALLIN situation)
+            return true
+        }
+        return false
+    }
+    
     func isInGame() -> Bool {
         if let seat = table.seats.first(where: { $0.isMySeat(userId: user.userId) }) {
             return seat.isInGame()
@@ -118,7 +125,25 @@ class GameManager {
     }
     
     func updateRoundState(action: Action, bet: Int? = nil) {
-        table.updateRoundState(action: action)
+        table.updateRoundState(action: action, bet: bet)
         updateTable()
+        updateUserChips()
+    }
+    
+    func updateUserChips() {
+        let userId = user.userId
+        let seat = table.seats.first(where: { $0.isInGame() && $0.player?.userId == userId })
+        if seat != nil {
+            client.updateUserChips(userId: userId, newChipsValue: (seat?.player!.chips)!) { result in
+                switch result {
+                case .success(let data):
+                    // Handle successful response
+                    print("Response: \(data)")
+                case .failure(let error):
+                    // Handle error
+                    print("Error: \(error)")
+                }
+            }
+        }
     }
 }

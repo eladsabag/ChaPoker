@@ -37,18 +37,18 @@ class Tester {
 
         let strongestHands = [player1StrongestHand, player2StrongestHand, player3StrongestHand]
 
-        print("Player 1 Strongest Hand: \(player1StrongestHand)")
-        print("Player 2 Strongest Hand: \(player2StrongestHand)")
-        print("Player 3 Strongest Hand: \(player3StrongestHand)")
+        print("Player 1 Strongest Hand: \(player1StrongestHand.description)")
+        print("Player 2 Strongest Hand: \(player2StrongestHand.description)")
+        print("Player 3 Strongest Hand: \(player3StrongestHand.description)")
 
-        let winners = GameValidator.determineWinners(strongestHands.map { $0.hand })
-
-        if winners.count == 1 {
-            print("Player \(winners[0] + 1) is the winner!")
-        } else if winners.count > 1 {
-            print("It's a tie between players: \(winners.map { $0 + 1 })")
-        } else {
-            print("No winners found.")
-        }
+//        let winners = GameValidator.determineWinners(strongestHands.map { $0.hand })
+//
+//        if winners.count == 1 {
+//            print("Player \(winners[0] + 1) is the winner!")
+//        } else if winners.count > 1 {
+//            print("It's a tie between players: \(winners.map { $0 + 1 })")
+//        } else {
+//            print("No winners found.")
+//        }
     }
 }
