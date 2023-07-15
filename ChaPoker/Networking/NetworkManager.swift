@@ -11,7 +11,6 @@ import FirebaseDatabase
 
 class NetworkManager {
     static let shared = NetworkManager()
-    static let baseUrl = "https://chapoker-ed624-default-rtdb.firebaseio.com/"
     var tablesReference: DatabaseReference!
     var usersReference: DatabaseReference!
 
@@ -45,7 +44,7 @@ class NetworkManager {
     
     func addTableToFirebase(table: Table, completion: @escaping (Result<Data, Error>) -> Void) {
         if let authToken = UserDefaultsManager.shared.getAuthToken() { // Retrieve the Firebase Authentication user ID
-            let url = URL(string: "\(NetworkManager.baseUrl)/tables/\(table.tableID).json?auth=\(authToken)")!
+            let url = URL(string: "\(Config.baseUrl)/tables/\(table.tableID).json?auth=\(authToken)")!
 
             var request = URLRequest(url: url)
             request.httpMethod = "PUT"
@@ -85,7 +84,7 @@ class NetworkManager {
     
     func fetchTables(completion: @escaping (Result<[Table], Error>) -> Void) {
         if let authToken = UserDefaultsManager.shared.getAuthToken() {
-            let url = URL(string: "\(NetworkManager.baseUrl)/tables.json?auth=\(authToken)")!
+            let url = URL(string: "\(Config.baseUrl)/tables.json?auth=\(authToken)")!
             
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
@@ -125,7 +124,7 @@ class NetworkManager {
     
     func addUserToFirebase(user: User, completion: @escaping (Result<Data, Error>) -> Void) {
         if let authToken = UserDefaultsManager.shared.getAuthToken() { // Retrieve the Firebase Authentication user ID
-            let url = URL(string: "\(NetworkManager.baseUrl)/users/\(user.userId).json?auth=\(authToken)")!
+            let url = URL(string: "\(Config.baseUrl)/users/\(user.userId).json?auth=\(authToken)")!
 
             var request = URLRequest(url: url)
             request.httpMethod = "PUT" 
@@ -166,7 +165,7 @@ class NetworkManager {
     
     func fetchCurrentUser(userId: String, completion: @escaping (Result<User, Error>) -> Void) {
         if let authToken = UserDefaultsManager.shared.getAuthToken() {
-            let url = URL(string: "\(NetworkManager.baseUrl)/users/\(userId).json?auth=\(authToken)")!
+            let url = URL(string: "\(Config.baseUrl)/users/\(userId).json?auth=\(authToken)")!
             
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let error = error {
@@ -194,7 +193,7 @@ class NetworkManager {
 
     func updateTable(table: Table, completion: @escaping (Result<Void, Error>) -> Void) {
         if let authToken = UserDefaultsManager.shared.getAuthToken() {
-            let url = URL(string: "\(NetworkManager.baseUrl)/tables/\(table.tableID).json?auth=\(authToken)")!
+            let url = URL(string: "\(Config.baseUrl)/tables/\(table.tableID).json?auth=\(authToken)")!
             
             var request = URLRequest(url: url)
             request.httpMethod = "PUT"

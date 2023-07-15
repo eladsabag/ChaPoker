@@ -15,6 +15,7 @@
 		833573352A58A6B10038A1F2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573342A58A6B10038A1F2 /* Action.swift */; };
 		833573372A58C10C0038A1F2 /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573362A58C10C0038A1F2 /* Seat.swift */; };
 		833573392A58D1D80038A1F2 /* Tester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833573382A58D1D80038A1F2 /* Tester.swift */; };
+		833D50572A62EAA7001C4319 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D50562A62EAA7001C4319 /* Config.swift */; };
 		83448CDF2A4DE0CA0066CE99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CDE2A4DE0CA0066CE99 /* AppDelegate.swift */; };
 		83448CE12A4DE0CA0066CE99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CE02A4DE0CA0066CE99 /* SceneDelegate.swift */; };
 		83448CE32A4DE0CA0066CE99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83448CE22A4DE0CA0066CE99 /* LoginViewController.swift */; };
@@ -100,6 +101,7 @@
 		833573342A58A6B10038A1F2 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		833573362A58C10C0038A1F2 /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
 		833573382A58D1D80038A1F2 /* Tester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tester.swift; sourceTree = "<group>"; };
+		833D50562A62EAA7001C4319 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		83448CDB2A4DE0CA0066CE99 /* ChaPoker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChaPoker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83448CDE2A4DE0CA0066CE99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83448CE02A4DE0CA0066CE99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				833573382A58D1D80038A1F2 /* Tester.swift */,
 				831658802A59605400368B7A /* NetworkMontior.swift */,
 				83322BF72A5C2C6000AC1112 /* Constants.swift */,
+				833D50562A62EAA7001C4319 /* Config.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				83448D592A4DF94E0066CE99 /* UserDefaultsManager.swift in Sources */,
 				8346B77A2A5020220066B315 /* LoginManager.swift in Sources */,
 				83967F572A4E4690000694B8 /* NetworkManager.swift in Sources */,
+				833D50572A62EAA7001C4319 /* Config.swift in Sources */,
 				8334A0F92A52185F00758D7B /* GameState.swift in Sources */,
 				83967F4E2A4E4122000694B8 /* Card.swift in Sources */,
 				8373165F2A54BB72003202F5 /* GameValidator.swift in Sources */,
