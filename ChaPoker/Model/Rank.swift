@@ -26,7 +26,7 @@ enum Rank: String, CaseIterable, Codable {
         switch self {
 //        case .ace:
 //            return 1
-        case .two:
+         case .two:
              return 2
          case .three:
              return 3
@@ -50,7 +50,7 @@ enum Rank: String, CaseIterable, Codable {
              return 12
          case .king:
              return 13
-        case .ace:
+         case .ace:
             return 14
         }
     }

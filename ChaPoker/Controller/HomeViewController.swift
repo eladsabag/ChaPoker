@@ -85,6 +85,7 @@ class HomeViewController: UIViewController {
     }
     
     func updateUI() {
+        Tester.testGameValidator()
         if homeManager?.tables == nil || homeManager!.tables!.isEmpty || homeManager!.tables!.count < 3 {
             return
         }

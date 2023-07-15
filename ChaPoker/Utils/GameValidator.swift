@@ -73,7 +73,7 @@ class GameValidator {
     }
     
     private static func calculateHandRankValue(_ hand: [Card]) -> Int {
-        let sortedHand = hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
+        let sortedHand = hand.sorted { $0.rank.value < $1.rank.value }
         if isRoyalFlush(sortedHand) {
             return 10
         } else if isStraightFlush(sortedHand) {
